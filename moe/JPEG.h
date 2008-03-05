@@ -4,7 +4,9 @@
 #include <stdio.h>
 #include <stdint.h>
 #include <setjmp.h>
+extern "C" {
 #include <jpeglib.h>
+}
 #include "Reader.h"
 
 struct jpeg_error

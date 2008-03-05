@@ -7,8 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3D06F5510D7F8A1500E4C37B /* resize.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D06F5500D7F8A1500E4C37B /* resize.cpp */; };
+		3D2A99C30D7F1CB9003153F5 /* image.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D2A99C20D7F1CB9003153F5 /* image.cpp */; };
+		3D2A99DF0D7F258E003153F5 /* jpeg.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D2A99DE0D7F258E003153F5 /* jpeg.cpp */; };
+		3D5A944C0D7F4F4D007B08C9 /* libjpeg.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D5A944B0D7F4F4D007B08C9 /* libjpeg.a */; };
 		8DD76F650486A84900D96B5E /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 08FB7796FE84155DC02AAC07 /* main.cpp */; settings = {ATTRIBUTES = (); }; };
-		8DD76F6A0486A84900D96B5E /* fastdownscale.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = C6859E8B029090EE04C91782 /* fastdownscale.1 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -18,7 +21,6 @@
 			dstPath = /usr/share/man/man1/;
 			dstSubfolderSpec = 0;
 			files = (
-				8DD76F6A0486A84900D96B5E /* fastdownscale.1 in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 1;
 		};
@@ -26,8 +28,16 @@
 
 /* Begin PBXFileReference section */
 		08FB7796FE84155DC02AAC07 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		3D06F54F0D7F8A1500E4C37B /* resize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = resize.h; sourceTree = "<group>"; };
+		3D06F5500D7F8A1500E4C37B /* resize.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = resize.cpp; sourceTree = "<group>"; };
+		3D2A99C10D7F1CB9003153F5 /* image.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = image.h; sourceTree = "<group>"; };
+		3D2A99C20D7F1CB9003153F5 /* image.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = image.cpp; sourceTree = "<group>"; };
+		3D2A99D20D7F2326003153F5 /* fastdownscale.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = fastdownscale.h; sourceTree = "<group>"; };
+		3D2A99DD0D7F258E003153F5 /* jpeg.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = jpeg.h; sourceTree = "<group>"; };
+		3D2A99DE0D7F258E003153F5 /* jpeg.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = jpeg.cpp; sourceTree = "<group>"; };
+		3D5A94480D7F4F45007B08C9 /* jpeglib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = jpeglib.h; path = "../jpeg-6b/jpeglib.h"; sourceTree = SOURCE_ROOT; };
+		3D5A944B0D7F4F4D007B08C9 /* libjpeg.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libjpeg.a; path = "../jpeg-6b/libjpeg.a"; sourceTree = SOURCE_ROOT; };
 		8DD76F6C0486A84900D96B5E /* fastdownscale */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = fastdownscale; sourceTree = BUILT_PRODUCTS_DIR; };
-		C6859E8B029090EE04C91782 /* fastdownscale.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = fastdownscale.1; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -35,6 +45,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3D5A944C0D7F4F4D007B08C9 /* libjpeg.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -44,6 +55,7 @@
 		08FB7794FE84155DC02AAC07 /* fastdownscale */ = {
 			isa = PBXGroup;
 			children = (
+				3D2A9A010D7F4588003153F5 /* Libraries */,
 				08FB7795FE84155DC02AAC07 /* Source */,
 				C6859E8C029090F304C91782 /* Documentation */,
 				1AB674ADFE9D54B511CA2CBB /* Products */,
@@ -54,7 +66,14 @@
 		08FB7795FE84155DC02AAC07 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				3D2A99D20D7F2326003153F5 /* fastdownscale.h */,
 				08FB7796FE84155DC02AAC07 /* main.cpp */,
+				3D2A99C10D7F1CB9003153F5 /* image.h */,
+				3D2A99C20D7F1CB9003153F5 /* image.cpp */,
+				3D2A99DD0D7F258E003153F5 /* jpeg.h */,
+				3D2A99DE0D7F258E003153F5 /* jpeg.cpp */,
+				3D06F54F0D7F8A1500E4C37B /* resize.h */,
+				3D06F5500D7F8A1500E4C37B /* resize.cpp */,
 			);
 			name = Source;
 			sourceTree = "<group>";
@@ -67,10 +86,18 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		3D2A9A010D7F4588003153F5 /* Libraries */ = {
+			isa = PBXGroup;
+			children = (
+				3D5A944B0D7F4F4D007B08C9 /* libjpeg.a */,
+				3D5A94480D7F4F45007B08C9 /* jpeglib.h */,
+			);
+			name = Libraries;
+			sourceTree = "<group>";
+		};
 		C6859E8C029090F304C91782 /* Documentation */ = {
 			isa = PBXGroup;
 			children = (
-				C6859E8B029090EE04C91782 /* fastdownscale.1 */,
 			);
 			name = Documentation;
 			sourceTree = "<group>";
@@ -119,6 +146,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				8DD76F650486A84900D96B5E /* main.cpp in Sources */,
+				3D2A99C30D7F1CB9003153F5 /* image.cpp in Sources */,
+				3D2A99DF0D7F258E003153F5 /* jpeg.cpp in Sources */,
+				3D06F5510D7F8A1500E4C37B /* resize.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -129,6 +159,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_FIX_AND_CONTINUE = YES;
 				GCC_MODEL_TUNING = G5;
@@ -137,19 +168,41 @@
 					"_GLIBCXX_DEBUG=1",
 					"_GLIBCXX_DEBUG_PEDANTIC=1",
 				);
+				HEADER_SEARCH_PATHS = /sw/include;
 				INSTALL_PATH = /usr/local/bin;
+				LIBRARY_SEARCH_PATHS = (
+					/sw/lib,
+					"$(inherited)",
+					"\"$(SRCROOT)/../jpeg-6b\"",
+				);
 				PRODUCT_NAME = fastdownscale;
-				ZERO_LINK = YES;
+				VALID_ARCHS = "ppc64 ppc7400 ppc970 i386 x86_64";
 			};
 			name = Debug;
 		};
 		1DEB923308733DC60010E9CD /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_AUTO_VECTORIZATION = YES;
+				GCC_ENABLE_CPP_EXCEPTIONS = NO;
+				GCC_ENABLE_CPP_RTTI = NO;
+				GCC_ENABLE_SSE3_EXTENSIONS = YES;
+				GCC_ENABLE_SUPPLEMENTAL_SSE3_INSTRUCTIONS = YES;
+				GCC_FAST_MATH = YES;
 				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 3;
+				GCC_STRICT_ALIASING = YES;
+				HEADER_SEARCH_PATHS = /sw/include;
 				INSTALL_PATH = /usr/local/bin;
+				LIBRARY_SEARCH_PATHS = (
+					/sw/lib,
+					"$(inherited)",
+					"\"$(SRCROOT)/../jpeg-6b\"",
+				);
 				PRODUCT_NAME = fastdownscale;
+				VALID_ARCHS = "ppc64 ppc7400 ppc970 i386 x86_64";
 			};
 			name = Release;
 		};
