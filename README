@@ -1,5 +1,8 @@
 The initial work for an efficient thumbnailing library.
 
+Requires libjpeg-6. Newer versions won't compile because the API
+changed.
+
 moe/ includes a reference implementation used in danbooru, which
 is much better than imagemagick and co, but is still inefficient
 and doesn't take advantage of many features of JPEG files.
@@ -28,11 +31,11 @@ Theory
 Problems
 =======================================
 
-* everything
+* Everything
 * Resizing down to about 75% produces strange undersampling artifacts
   (it looks like a nearest-neighbor resize). It's probably fast enough
   these days to use a better resampling kernel anyway.
-* Make it compile with libjpeg-8
+* Doesn't compile with libjpeg-8
 * No PNG support
 * No GIF support
 * No WebP support(?)
