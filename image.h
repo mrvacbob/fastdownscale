@@ -26,27 +26,27 @@
 
 struct image
 {
-	ssize_t image_w, image_h;
+	int image_w, image_h;
 	
 	//window_w = size of a line for all current files
 	//window_h = above row counts
-	ssize_t window_w, window_h;
-	size_t channels;
+	int window_w, window_h;
+	int channels;
 	bool planar, subsampled, interlaced, YUV;
 	
 	uint8_t **data;
 	
 	bool valid;
-	size_t last_row;
+	int last_row;
 	
 	image() : valid(true) {}
 	image(FILE *from, size_t thumbsize);
-	image(image *attributes, size_t width, size_t height, bool subsample_width = false, bool subsample_height = false);
+	image(image *attributes, int width, int height, bool subsample_width = false, bool subsample_height = false);
 	virtual ~image();
 	
 	void allocate(bool subsample_width = false, bool subsample_height = false);
-	size_t planes() {return planar ? channels : 1;}
-	virtual size_t refill() {return 0;}
+	int planes() {return planar ? channels : 1;}
+	virtual int refill() {return 0;}
 	void to_raw(const char *fn, int plane);
 	void to_jpeg(const char *fn, int quality);
 };

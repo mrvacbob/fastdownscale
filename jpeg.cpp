@@ -16,7 +16,7 @@
 
 #include "jpeg.h"
 
-jpeg::jpeg(FILE *f, size_t thumbsize)
+jpeg::jpeg(FILE *f, int thumbsize)
 {
 	bool complicated = false;
 	float factor;
@@ -33,9 +33,11 @@ jpeg::jpeg(FILE *f, size_t thumbsize)
 	
 	channels = 3;
 	
-	if (jd.num_components != 3 || jd.max_v_samp_factor > 2 || jd.max_h_samp_factor != jd.max_v_samp_factor) complicated = true;
+	if (jd.num_components != 3 || jd.max_v_samp_factor > 2 || jd.max_h_samp_factor != jd.max_v_samp_factor)
+        complicated = true;
 	
 	YUV = (jd.jpeg_color_space == JCS_YCbCr) && !complicated;
+
 	if (YUV) {
 		jd.raw_data_out = true;
 		jd.out_color_space = JCS_YCbCr;
@@ -46,7 +48,7 @@ jpeg::jpeg(FILE *f, size_t thumbsize)
 	
 	jd.dct_method = JDCT_FASTEST;
 	
-	factor = (float)max(image_w,image_h) / (float)thumbsize;
+	factor = max(image_w,image_h) / (float)thumbsize;
 	lowres = YUV && (factor > 8.);
 		
 	if (lowres) {
@@ -56,7 +58,7 @@ jpeg::jpeg(FILE *f, size_t thumbsize)
 		window_h = jd.max_v_samp_factor*(jd.min_DCT_h_scaled_size/8);
 		image_h /= 8;
 		window_w = image_w /= 8;
-		factor = (float)max(image_w,image_h) / (float)thumbsize;
+		factor = max(image_w,image_h) / (float)thumbsize;
 	}
 	
 	jpeg_start_decompress(&jd);
@@ -65,8 +67,8 @@ jpeg::jpeg(FILE *f, size_t thumbsize)
 	if (YUV) {
 		jpeg_rows = new JSAMPARRAY[3];
 		for (int i = 0; i < 3; i++) {
-			size_t subsample = (subsampled && i > 0) ? 2 : 1; 
-			size_t rh = window_h / subsample;
+			int subsample = (subsampled && i > 0) ? 2 : 1; 
+			int rh = window_h / subsample;
 			JSAMPARRAY a = new JSAMPROW[rh];
 			
 			if (lowres && subsample != 1) {
@@ -98,9 +100,9 @@ jpeg::~jpeg()
 	}
 }
 
-size_t jpeg::refill()
+int jpeg::refill()
 {
-	size_t s;
+	int s;
 	if (YUV) {
 		s = jpeg_read_raw_data(&jd, jpeg_rows, window_h);
 		last_row += s;
@@ -127,7 +129,7 @@ void image::to_jpeg(const char *fn, int quality)
 	
 	if (YUV) {
 		jc.raw_data_in = true;
-		if (!subsampled) { // xxx get rid of this
+		if (!subsampled) { // XXX try not doing this
 			jc.comp_info[0].h_samp_factor /= 2;
 			jc.comp_info[0].v_samp_factor /= 2;
 		}
@@ -141,7 +143,8 @@ void image::to_jpeg(const char *fn, int quality)
 		JSAMPARRAY image[3];
 		
 		for (int c = 0; c < 3; c++) {
-			size_t subsample = (subsampled && c > 0) ? 2 : 1, height = round_up_16(window_h)/subsample, width = window_w/subsample; 
+			int subsample = (subsampled && c > 0) ? 2 : 1,
+                   height = round_up_16(window_h)/subsample, width = window_w/subsample; 
 			image[c] = new JSAMPROW[height];
 			
 			for (int i = 0; i < height; i++) image[c][i] = &data[c][i*width];
@@ -152,7 +155,7 @@ void image::to_jpeg(const char *fn, int quality)
 		
 		do {
 			JSAMPARRAY rows[3];
-			unsigned res;
+			int res;
 			for (int c = 0; c < 3; c++) {
 				size_t subsample = (subsampled && c > 0) ? 2 : 1;
 				rows[c] = &image[c][row/subsample];

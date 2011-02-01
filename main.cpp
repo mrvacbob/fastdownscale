@@ -18,7 +18,7 @@
 
 int main (int argc, char * const argv[]) {
 	if (argc < 3) {
-		printf("fastdownscale [input JPEG] [output JPEG] [largest dimension]\n");
+		fprintf(stderr, "%s [input JPEG] [output JPEG] [largest dimension]\n", argv[0]);
 		return 1;
 	}
 	

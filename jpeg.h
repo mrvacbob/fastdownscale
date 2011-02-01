@@ -28,8 +28,8 @@ struct jpeg : public image
 	bool lowres;
 	JSAMPIMAGE jpeg_rows;
 	
-	jpeg(FILE *, size_t);
+	jpeg(FILE *, int);
 	~jpeg();
-	size_t refill();
+	int refill();
 };
 #endif
