@@ -57,3 +57,5 @@ To experiment with
   since it allocates the entire image beforehand, but is much faster.
 * swscale for resizing
 * libjpeg-turbo
+* increase lowpass (softness) of thumbnail image as a prefilter
+  to improve ringing artifacts in the JPEG
