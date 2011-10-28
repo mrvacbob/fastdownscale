@@ -18,6 +18,6 @@
 #define __RESIZE_H__
 #include "image.h"
 
-extern image *resize_to(const char *fn, FILE *f, size_t max_size);
+image *resize_to(const char *fn, FILE *f, int max_size);
 
 #endif

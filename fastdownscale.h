@@ -26,7 +26,7 @@
 #define max(a, b) ((a) > (b)) ? a : b
 #define min(a, b) ((a) < (b)) ? a : b
 
-static unsigned round_up(unsigned a, unsigned b)
+static inline unsigned round_up(unsigned a, unsigned b)
 {
 	if (a % b == 0) return a;
 	return ((a / b) + 1) * b;

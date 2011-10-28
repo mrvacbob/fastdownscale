@@ -18,7 +18,7 @@
 #define __JPEG_H__
 #include "image.h"
 extern "C" {
-#include <jpeglib.h>
+#include "jpeglib.h"
 }
 
 struct jpeg : public image
