@@ -1,11 +1,14 @@
 The initial work for an efficient thumbnailing library.
 
-Requires libjpeg-6. Newer versions won't compile because the API
-changed.
+=======================================
+Distribution
+=======================================
+Includes source for:
+- libjpeg-8c
 
-moe/ includes a reference implementation used in danbooru, which
-is much better than imagemagick and co, but is still inefficient
-and doesn't take advantage of many features of JPEG files.
+I may patch the bundled libraries to fix
+security/performance problems. I haven't
+made any effort to keep these compatible.
 
 =======================================
 Theory
@@ -21,41 +24,31 @@ Theory
   the first scan.
 * When resizing 1/2 to 1/4 the size, we can use lowres IDCT.
 * Resampling kernels are separable, so the horizontal and vertical
-  scaling can be done in separate passes. This means the horizontal
-  scaling pass only needs to run on one row at a time, so the rest
-  don't need to be allocated (except to save work in decoding stages).
+  scaling can be done in separate passes.
 * Resampling images should be done with fixed-point math.
-* Vertical scaling is easy to do in SIMD.
+* Using a softer filter for resizing will avoid ringing in the output
+  image.
 
 =======================================
 Problems
 =======================================
 
-* Everything
-* Resizing down to about 75% produces strange undersampling artifacts
-  (it looks like a nearest-neighbor resize). It's probably fast enough
-  these days to use a better resampling kernel anyway.
-* Doesn't compile with libjpeg-8
-* No PNG support
-* No GIF support
-* No WebP support(?)
+* It's buggy.
+* Needs PNG/GIF support at least.
 * Written in C++
 * libjpeg is extremely inefficient; opening any file involves malloc()+bzero()
   of very large arrays. I wrote a patch to use calloc() and then lost it.
   Even with calloc() the thumbnailer died in my Linux VM on some large images.
   Can't remember if it was virtual or physical memory exhaustion, which would be
   important to know.
-* resample.cpp is crazy and should be rewritten. However, it's still less
-  crazy than everyone else's attempts at writing resampling code. In particular,
-  it uses 1D passes (good) and it's short (good) but uses floating point (bad).
+* resample.cpp needs cleaning, although I still think it's better than everyone
+  else's code.
 
 =======================================
-To experiment with
+Need to benchmark
 =======================================
 
-* libavcodec for image decoding. It will use (much) more memory,
-  since it allocates the entire image beforehand, but is much faster.
-* swscale for resizing
-* libjpeg-turbo
-* increase lowpass (softness) of thumbnail image as a prefilter
-  to improve ringing artifacts in the JPEG
+* libavcodec for decoding
+* libavcodec for thumbnailing
+* libjpeg-turbo for thumbnailing
+* libswscale for resizing
