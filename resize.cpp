@@ -108,7 +108,7 @@ void resize(const char *in_file, const char *out_file, int max_dimension, float 
             assert(dest_w);
 
 			resize_pass<1>(src->data[c],
-                           temp->data[c] + dest_row*dest_w,
+                          temp->data[c] + dest_row*dest_w,
                             src_w,
                            dest_w,
 								1,
@@ -136,14 +136,14 @@ void resize(const char *in_file, const char *out_file, int max_dimension, float 
 
         resize_pass<1>(temp->data[c],
                        final.data[c],
-                       src_h,
-                       dest_h,
-                       src_w,
-                       dest_w,
-                       src_w,
-                       1,
-                       1,
-                       factor * extra_chroma_factor);
+                               src_h,
+                              dest_h,
+                               src_w,
+                              dest_w,
+                               src_w,
+                                   1,
+                                   1,
+                              factor * extra_chroma_factor);
     }
 
     delete temp;
