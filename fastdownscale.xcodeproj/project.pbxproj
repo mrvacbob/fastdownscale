@@ -10,6 +10,7 @@
 		3D06F5510D7F8A1500E4C37B /* resize.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D06F5500D7F8A1500E4C37B /* resize.cpp */; };
 		3D2A99C30D7F1CB9003153F5 /* image.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D2A99C20D7F1CB9003153F5 /* image.cpp */; };
 		3D2A99DF0D7F258E003153F5 /* jpeg.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D2A99DE0D7F258E003153F5 /* jpeg.cpp */; };
+		3D52F13C145B3C7800B00095 /* utils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D52F13B145B3C7800B00095 /* utils.cpp */; };
 		3D66CAFA145B2A9C0091A31C /* jaricom.c in Sources */ = {isa = PBXBuildFile; fileRef = 3D66CAC2145B2A9C0091A31C /* jaricom.c */; };
 		3D66CAFB145B2A9C0091A31C /* jcapimin.c in Sources */ = {isa = PBXBuildFile; fileRef = 3D66CAC3145B2A9C0091A31C /* jcapimin.c */; };
 		3D66CAFC145B2A9C0091A31C /* jcapistd.c in Sources */ = {isa = PBXBuildFile; fileRef = 3D66CAC4145B2A9C0091A31C /* jcapistd.c */; };
@@ -90,6 +91,8 @@
 		3D2A99D20D7F2326003153F5 /* fastdownscale.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = fastdownscale.h; sourceTree = "<group>"; };
 		3D2A99DD0D7F258E003153F5 /* jpeg.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = jpeg.h; sourceTree = "<group>"; };
 		3D2A99DE0D7F258E003153F5 /* jpeg.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = jpeg.cpp; sourceTree = "<group>"; };
+		3D52F13A145B3A1000B00095 /* utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = utils.h; sourceTree = "<group>"; };
+		3D52F13B145B3C7800B00095 /* utils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = utils.cpp; sourceTree = "<group>"; };
 		3D66CABD145B2A900091A31C /* libjpeg.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libjpeg.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		3D66CAC2145B2A9C0091A31C /* jaricom.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = jaricom.c; sourceTree = "<group>"; };
 		3D66CAC3145B2A9C0091A31C /* jcapimin.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = jcapimin.c; sourceTree = "<group>"; };
@@ -191,6 +194,8 @@
 				3D2A99DE0D7F258E003153F5 /* jpeg.cpp */,
 				3D06F54F0D7F8A1500E4C37B /* resize.h */,
 				3D06F5500D7F8A1500E4C37B /* resize.cpp */,
+				3D52F13A145B3A1000B00095 /* utils.h */,
+				3D52F13B145B3C7800B00095 /* utils.cpp */,
 			);
 			name = Source;
 			sourceTree = "<group>";
@@ -430,6 +435,7 @@
 				3D2A99C30D7F1CB9003153F5 /* image.cpp in Sources */,
 				3D2A99DF0D7F258E003153F5 /* jpeg.cpp in Sources */,
 				3D06F5510D7F8A1500E4C37B /* resize.cpp in Sources */,
+				3D52F13C145B3C7800B00095 /* utils.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -441,6 +447,7 @@
 			buildSettings = {
 				COPY_PHASE_STRIP = NO;
 				DEAD_CODE_STRIPPING = YES;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INSTALL_PATH = /usr/local/bin;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -457,6 +464,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_ENABLE_CPP_EXCEPTIONS = NO;
 				GCC_ENABLE_CPP_RTTI = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INSTALL_PATH = /usr/local/bin;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -503,6 +511,7 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				EXECUTABLE_PREFIX = lib;
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -512,6 +521,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				EXECUTABLE_PREFIX = lib;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;

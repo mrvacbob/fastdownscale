@@ -17,18 +17,22 @@
 #ifndef __JPEG_H__
 #define __JPEG_H__
 #include "image.h"
+
 extern "C" {
-#include "jpeglib.h"
+#include <stdint.h>
+#include <jpeglib.h>
 }
 
 struct jpeg : public image
 {
 	jpeg_decompress_struct jd;
 	jpeg_error_mgr jerr;
-	bool lowres;
 	JSAMPIMAGE jpeg_rows;
-	
-	jpeg(FILE *, int);
+    FILE *in_file;
+    bool lowres; // if doing 8x reduction
+                 // TODO: also support 4x/2x reduction
+
+	jpeg(const char *file_path, int thumb_size);
 	~jpeg();
 	int refill();
 };

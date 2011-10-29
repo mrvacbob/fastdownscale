@@ -14,25 +14,20 @@
  * OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  */
 
+#include <stdio.h>
+#include <stdlib.h>
+
 #include "resize.h"
 
 int main (int argc, char * const argv[]) {
-	if (argc < 3) {
+	if (argc < 4) {
 		fprintf(stderr, "%s [input JPEG] [output JPEG] [largest dimension]\n", argv[0]);
 		return 1;
 	}
-	
-    FILE *f = fopen(argv[1], "rb");
-    
-    if (f) {
-        image *thumb = resize_to(argv[1], f, atoi(argv[3]));
-        
-        if (thumb) {
-            thumb->to_jpeg(argv[2], 95);
-            delete thumb;
-            
-            return 0;
-        }
-    }
-    return 1;
+
+    float thumb_quality = 95;
+
+    resize(argv[1], argv[2], atoi(argv[3]), thumb_quality);
+
+    return 0;
 }

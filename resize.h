@@ -16,8 +16,7 @@
 
 #ifndef __RESIZE_H__
 #define __RESIZE_H__
-#include "image.h"
 
-image *resize_to(const char *fn, FILE *f, int max_size);
+void resize(const char *in_file, const char *out_file, int max_dimension, float quality);
 
 #endif

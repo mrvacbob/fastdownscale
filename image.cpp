@@ -14,42 +14,52 @@
  * OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  */
 
-#include "Image.h"
+#include <stdio.h>
+#include <limits.h>
 
-image::image(image *attributes, int width, int height, bool subsample_width, bool subsample_height)
+#include "image.h"
+#include "utils.h"
+
+image::image(image *attributes, int width, int height, bool subsample_w, bool subsample_h)
 {
-	window_w = image_w = width;
-	window_h = image_h = height;
+    window_w = image_w  = width;
+	window_h = image_h  = height;
+    check_fatal(round_up(window_h, 8) < INT_MAX && round_up(window_w, 8) < INT_MAX, "created image size too large");
 	channels = attributes->channels;
-	planar = attributes->planar;
-	subsampled = attributes->subsampled || (subsample_width && subsample_height);
-	YUV = attributes->YUV;
-	allocate(subsample_width,subsample_height);
+	planar   = attributes->planar;
+    subsampled_w = attributes->subsampled_w || subsample_w;
+    subsampled_h = attributes->subsampled_h || subsample_h;
+    subsampled = subsampled_w && subsampled_h;
+	YUV      = attributes->YUV;
+	allocate();
 }
 
 image::~image()
 {
-	for (int i = 0; i < planes(); i++) free(data[i]);
-	free(data);
+	for (int i = 0; i < num_planes(); i++)
+        delete[] data[i];
+	delete[] data;
 }
 
-void image::allocate(bool subsample_width, bool subsample_height)
+void image::allocate()
 {
-	data = (uint8_t**)malloc(planes()*sizeof(uint8_t*));
-	for (int i = 0; i < planes(); i++) {
-		size_t s = round_up_16(window_w) * round_up_16(window_h);
-		if (i > 0 && (subsampled ||  subsample_width)) s /= 2;
-		if (i > 0 && (subsampled || subsample_height)) s /= 2;
-		
-		data[i] = (uint8_t*)malloc(s);
+    data = new uint8_t*[num_planes()];
+
+	for (int i = 0; i < num_planes(); i++) {
+        bool subsample_w = i > 0 && subsampled_w;
+        bool subsample_h = i > 0 && subsampled_h;
+		int s = (window_w >> subsample_w) * (window_h >> subsample_h);
+
+		data[i] = new uint8_t[s + 16];
 	}
 }
 
 void image::to_raw(const char *fn, int plane)
 {
 	FILE *f = fopen(fn, "wb");
-	int subsample = (subsampled && plane > 0) ? 2 : 1;
-	printf("%d x %d -> %s\n",(window_w/subsample),(window_h/subsample),fn);
-	fwrite(data[plane], (window_w/subsample)*(window_h/subsample)*(planar?1:channels), 1, f);
+    bool subsample_w = plane > 0 && subsampled_w;
+    bool subsample_h = plane > 0 && subsampled_h;
+
+	fwrite(data[plane], (window_w>>subsample_w)*(window_h>>subsample_h)*(planar?1:channels), 1, f);
 	fclose(f);
 }

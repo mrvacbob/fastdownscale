@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2008 Alexander Strange <astrange@ithinksw.com>
+ * Copyright (c) 2011 Alexander Strange <astrange@ithinksw.com>
  *
  * Permission to use, copy, modify, and distribute this software for any
  * purpose with or without fee is hereby granted, provided that the above
@@ -14,14 +14,4 @@
  * OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  */
 
-#ifndef __FASTDOWNSCALE_H__
-#define __FASTDOWNSCALE_H__
-
-// Library declarations go here
-#include <stdint.h>
-
-__BEGIN_DECLS
-
-__END_DECLS
-
-#endif
+#include "utils.h"

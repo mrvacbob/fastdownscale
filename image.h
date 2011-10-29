@@ -16,6 +16,7 @@
 
 #ifndef __IMAGE_H__
 #define __IMAGE_H__
+
 #include "fastdownscale.h"
 
 //memory use:
@@ -26,29 +27,31 @@
 
 struct image
 {
-	int image_w, image_h;
-	
-	//window_w = size of a line for all current files
-	//window_h = above row counts
-	int window_w, window_h;
+	int image_w, image_h;   // size of input image
+	int window_w, window_h; // size of image we need to store at once
+
 	int channels;
-	bool planar, subsampled, interlaced, YUV;
-	
+
+    // image representation flags
+	bool planar, interlaced, YUV, subsampled;
+
+    bool subsampled_w, subsampled_h;
+
 	uint8_t **data;
-	
+
 	bool valid;
-	int last_row;
-	
-	image() : valid(true) {}
-	image(FILE *from, size_t thumbsize);
-	image(image *attributes, int width, int height, bool subsample_width = false, bool subsample_height = false);
+
+	image() : valid(false) {}
+	image(const char *file_path, int thumb_size);
+	image(image *attributes, int width, int height, bool subsample_w = false, bool subsample_h = false);
 	virtual ~image();
-	
-	void allocate(bool subsample_width = false, bool subsample_height = false);
-	int planes() {return planar ? channels : 1;}
+
+	void allocate();
+	int num_planes() {return planar ? channels : 1;}
 	virtual int refill() {return 0;}
-	void to_raw(const char *fn, int plane);
-	void to_jpeg(const char *fn, int quality);
+
+	void  to_raw(const char *fn, int plane);
+	void to_jpeg(const char *fn, float quality); // in jpeg.cpp
 };
 
 #endif
