@@ -21,6 +21,18 @@
 #include "jpeg.h"
 #include "utils.h"
 
+/*
+ TODO:
+
+ - find a way to avoid recalculating 'center' in resize_pass (so FP math will go away)
+ - expand borders in image rather than using edge emulation (remove min/max calls in src_l/r)
+ - use fixed-point math to avoid the division
+
+ slow mode:
+ - Blackman or Lanczos3 filter
+ - 16-bit internal precision + gamma correction via lookup tables
+ */
+
 // XXX: switchable filter here (blackman, gaussian, box)
 
 #define support .5f
@@ -46,10 +58,10 @@ static inline void resize_pass(const uint8_t *src,
 {
 	for (int y = 0; y < height; y++) {
 		for (int x = 0; x < dest_w; x++) {
-			float center = (x + .5f) * factor,
-                  left   = floorf(center - (factor * support)),
-                  right  =  ceilf(center + (factor * support)),
-                  length = right - left;
+			float center = (x + .5f) * factor;
+            int left   = center - (factor * support),
+                right  = center + (factor * support) + .5f,
+                length = right - left;
 
 			int src_l = std::max((int)left, 0),
                 src_r = std::min((int)right, src_w);
@@ -63,11 +75,11 @@ static inline void resize_pass(const uint8_t *src,
 
 			for (int c = 0; c < channels; c++) {
                 int sum = sums[c];
-                float avg = sum / length;
+                int avg = (sum + (length>>1)) / length;
                 int yoff = y*dest_ystride;
                 int xoff = x*dest_xstride;
 
-                dest[yoff + xoff + c] = clip8(avg + .5f);
+                dest[yoff + xoff + c] = clip8(avg);
             }
 		}
 	}
